@@ -1,0 +1,72 @@
+<!doctype html>
+<html >
+    <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+    </head>
+    <body ng-app="todoApp" >
+    <div class="column columnContact" ng-controller="mailCtrl">
+        <div class="row" >
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+            <form id="formContact" name="myForm" novalidate>
+              <div class="form-group">
+                <label for="formGroupExampleInput">Nombre</label>
+                <input name="nameUserContact" ng-model="user.nameUserCntact" type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre completo" required>
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Correo Electrónico</label>
+                <input name="mailUserContact" ng-model="user.mailUserContact" type="email" class="form-control" id="formGroupExampleInput2" placeholder="uncorreo@host.com" required>
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput3">Teléfono</label>
+                <input name="telUserContact" ng-model="user.telUserContact"  type="text" class="form-control" id="formGroupExampleInput3" placeholder="Su nùmero a 10 digitos" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Mensaje</label>
+                <textarea style="width:100%;" name="bodyMsgContact" ng-model="user.bodyMsgContact"  class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escriba su mensaje" required></textarea>
+              </div>
+              <div class=" form-group">
+                <div class="row">
+                  <div class="col-2 ">
+                    <button id="go" ng-disabled="myForm.$invalid" type="submit" ng-click="sendMail(user)" class="btn btn-primary">Enviar</button>
+                  </div>
+                  <div class="col-10">
+                    <div class="alert alert-danger" role="alert" ng-show="myForm.nameUserContact.$dirty && myForm.nameUserContact.$invalid">
+                      <span  ng-show="myForm.nameUserContact.$error.required">Ingrese su nombre.</span>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="myForm.telUserContact.$dirty && myForm.telUserContact.$invalid">
+                      <span ng-show="myForm.telUserContact.$error.required">Ingrese su número teléfonico.</span>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="myForm.mailUserContact.$dirty && myForm.mailUserContact.$invalid">
+                      <span ng-show="myForm.mailUserContact.$error.required">Ingrese una dirección de correo.</span>
+                      <span ng-show="myForm.mailUserContact.$error.email">Ingrese una dirección de correo valida.</span>
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="myForm.bodyMsgContact.$dirty && myForm.bodyMsgContact.$invalid">
+                      <span ng-show="myForm.bodyMsgContact.$error.required">Escriba su mensaje.</span>
+                    </div>
+                    <div id="showMsg" class="alert alert-success" role="success" ng-show="myForm.$submitted" >
+                      <span >Gracias su mensaje se envio exitosamente</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+      <script src="js/index.js"></script>
+      <script src="js/controllers/mailCtrl.js"></script>
+      <script src="js/services/mailService.js"></script>
+      <script>
+        $('#go').click(function(){
+          $('#showMsg').fadeIn().delay(3000).fadeOut();
+          });
+      </script>
+    </body>
+</html>
+
